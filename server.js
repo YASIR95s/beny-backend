@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const axios = require('axios');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -13,7 +12,7 @@ app.get('/', (req,res)=>{
 });
 
 app.get('/health',(req,res)=>{
-  res.json({status:'ok'});
+  res.json({status:'ok', address: DEPOSIT_ADDRESS});
 });
 
 app.get('/api/deposit/address',(req,res)=>{
@@ -29,7 +28,8 @@ app.post('/api/deposit/confirm',(req,res)=>{
   res.json({
     success: true,
     amount: req.body.amount || 100,
-    message: 'Deposit confirmed!'
+    address: DEPOSIT_ADDRESS,
+    message: 'Deposit confirmed! Balance updated.'
   });
 });
 
